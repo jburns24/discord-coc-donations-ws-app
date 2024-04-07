@@ -1,6 +1,7 @@
 {
   "name": "discord-coc-donations-ws-app",
   "version": "1.0.0",
+  "type": "module",
   "description": "websocket discord app that sends donation information for clash of clans",
   "main": "index.js",
   "scripts": {
@@ -10,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "clashofclans.js": "^3.3.4",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5"
   }

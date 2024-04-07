@@ -1,7 +1,7 @@
 -include .env
 export
 
-run:
+up:
 	npm start
 
 create-env:
