@@ -1,11 +1,18 @@
 version: '3'
 services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: coc-donations
+    command: ["npm install --include=dev && npm start"]
+    init: true
+    volumes:
+      - type: bind
+        source: .
+        target: /app
   app:
     build:
       context: .
       dockerfile: Dockerfile
     image: coc-donations:latest
-    volumes:
-      - type: bind
-        source: .
-        target: /app
