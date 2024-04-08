@@ -12,3 +12,6 @@ create-env:
 
 lint:
 	docker compose run --rm app npm run lint
+
+build:
+	docker compose build
