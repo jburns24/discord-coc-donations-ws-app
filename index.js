@@ -3,6 +3,8 @@ import { Client as DiscordClient, GatewayIntentBits } from 'discord.js';
 import { Client as ClashClient } from 'clashofclans.js';
 import { getClanTag } from './helpers.js';
 
+const unused= 0;
+
 // Create a new client instance with intents that allow the bot to get information about guilds, messages, and message content
 const discordClient = new DiscordClient({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const clashClient = new ClashClient({ keys: [process.env.CLASH_TOKEN] });

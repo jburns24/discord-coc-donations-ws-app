@@ -2,10 +2,13 @@
 export
 
 up:
-	npm start
+	docker compose up
+
+down:
+	docker compose down
 
 create-env:
 	@if [ ! -f .env ]; then cp .env.sample .env; fi
 
-echo:
-	@echo $(TEST)
+lint:
+	docker compose run --rm app npm run lint
