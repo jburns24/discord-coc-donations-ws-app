@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: coc-donations
+    image: coc-donations:dev
     command: ["npm install --include=dev && npm start"]
     init: true
     volumes:
