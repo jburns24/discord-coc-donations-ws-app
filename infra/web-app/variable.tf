@@ -7,3 +7,8 @@ variable "location" {
   description = "The location for the resource group"
   type        = string
 }
+
+variable "app_name" {
+  description = "The name of the app service"
+  type        = string
+}
