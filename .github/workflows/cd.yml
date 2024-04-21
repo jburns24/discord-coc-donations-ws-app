@@ -1,0 +1,17 @@
+name: Continuous Deployment
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Pull image
+        run: docker pull ghcr.io/jburns24/discord-coc-donations-ws-app:${{ github.sha }}
