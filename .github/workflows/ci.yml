@@ -29,5 +29,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/user/app:latest
-            ghcr.io/user/app:${{ github.sha }}
+            ghcr.io/jburns24/coc-disco-donations:latest
+            ghcr.io/jburns24/coc-disco-donations:${{ github.sha }}
