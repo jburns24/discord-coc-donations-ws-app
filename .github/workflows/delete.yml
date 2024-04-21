@@ -2,6 +2,11 @@ name: Delete Workflow
 
 on:
   workflow_dispatch:
+
+env:
+  # Setting an environment variable with the value of a configuration variable
+  APP_NAME: ${{ vars.APP_NAME }}
+
 jobs:
   delete:
     runs-on: ubuntu-latest
