@@ -47,6 +47,7 @@ jobs:
       - name: Terragrunt Plan
         id: terragrunt_plan
         run: |
+          terragrunt init --terragrunt-non-interactive
           terragrunt plan --terragrunt-non-interactive -out plan.out
           terragrunt show --terragrunt-non-interactive -no-color -json plan.out > plan.json
         continue-on-error: true # Continue on error to ensure the plan is added as a comment on the PR.
