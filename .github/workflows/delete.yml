@@ -6,6 +6,10 @@ on:
 env:
   # Setting an environment variable with the value of a configuration variable
   APP_NAME: ${{ vars.APP_NAME }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
 jobs:
   delete:
@@ -20,9 +24,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # - uses: azure/login@v1
+      #   with:
+      #     creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - uses: alexellis/arkade-get@master
         with:
