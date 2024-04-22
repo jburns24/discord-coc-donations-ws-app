@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/husky.sh"
+
+
+pushd ./infra
+trap 'popd' EXIT
+
+## Pre-commit hook that checks for spelling
+echo "\033[33mStarting Terrafom HCL Format check...\033[0m"
+terragrunt hclfmt --terragrunt-check
+echo "\033[32mTerrafom HCL Format passed\033[0m"
+echo
+echo "\033[33mStarting Terrafom Format check...\033[0m"
+## Pre-commit hook that condenses section front-matter into master record.
+terraform fmt -check -recursive
+echo "\033[32mTerrafom Format passed\033[0m"
+echo
+echo "\033[33mStarting Terragrunt validate check...\033[0m"
+## Pre-commit hook that condenses section front-matter into master record.
+terragrunt run-all validate --terragrunt-non-interactive
+echo "\033[32mTerrafom validate passed\033[0m"
+echo
+echo "\033[32mDone\033[0m"
