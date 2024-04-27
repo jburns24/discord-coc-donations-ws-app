@@ -16,3 +16,5 @@ services:
       context: .
       dockerfile: Dockerfile
     image: coc-donations:latest
+    env_file:
+      - .env
