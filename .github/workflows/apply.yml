@@ -50,4 +50,6 @@ jobs:
           terragrunt: latest
 
       - name: Terragrunt apply
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: |
+          set
+          terragrunt apply --terragrunt-non-interactive -auto-approve
