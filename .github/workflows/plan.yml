@@ -8,6 +8,11 @@ on:
     paths:
       - 'infra/**'
 
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
 env:
   # Setting an environment variable with the value of a configuration variable
   APP_NAME: ${{ vars.APP_NAME }}
