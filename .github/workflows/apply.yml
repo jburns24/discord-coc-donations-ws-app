@@ -1,4 +1,4 @@
-name: Plan Workflow
+name: Apply Workflow
 
 on:
   workflow_dispatch:
@@ -43,4 +43,4 @@ jobs:
           terragrunt: latest
 
       - name: Terragrunt apply
-        run: terragrunt apply --terragrunt-non-interactive
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
