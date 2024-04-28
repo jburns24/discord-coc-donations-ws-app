@@ -12,3 +12,8 @@ variable "app_name" {
   description = "The name of the app service"
   type        = string
 }
+
+variable "secret" {
+  description = "value of the secret"
+  type        = string
+}
