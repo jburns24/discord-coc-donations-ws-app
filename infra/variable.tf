@@ -13,7 +13,13 @@ variable "app_name" {
   type        = string
 }
 
-variable "secret" {
-  description = "value of the secret"
+variable "discord_token" {
+  description = "The Discord token for the app service"
   type        = string
+}
+
+variable "clash_token" {
+  description = "The Clash token for the app service"
+  type        = string
+
 }

@@ -1,7 +1,12 @@
-name: Delete Workflow
+name: Plan Workflow
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'infra/**'
 
 env:
   # Setting an environment variable with the value of a configuration variable
@@ -10,10 +15,11 @@ env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  TF_VAR_secret: ${{ secrets.TEST_SECRET }}
+  TF_VAR_discord_token: ${{ secrets.DISCORD_TOKEN }}
+  TF_VAR_clash_token: ${{ secrets.CLASH_TOKEN }}
 
 jobs:
-  delete:
+  plan:
     runs-on: ubuntu-latest
     defaults:
       run:

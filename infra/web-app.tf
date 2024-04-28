@@ -14,7 +14,8 @@ resource "azurerm_linux_web_app" "coc_donations_app_service" {
 
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "SECRET"                              = var.secret
+    "DISCORD_TOKEN"                       = var.discord_token
+    "CLASH_TOKEN"                         = var.clash_token
   }
 
   site_config {
