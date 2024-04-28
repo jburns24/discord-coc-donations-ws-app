@@ -1,7 +1,17 @@
-name: Delete Workflow
+name: Plan Workflow
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'infra/**'
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
 
 env:
   # Setting an environment variable with the value of a configuration variable
@@ -10,13 +20,15 @@ env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  TF_VAR_discord_token: ${{ secrets.DISCORD_TOKEN }}
+  TF_VAR_clash_token: ${{ secrets.CLASH_TOKEN }}
 
 jobs:
-  delete:
+  plan:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./infra
+        working-directory: ./infra/environments/dev
 
     if: github.actor == 'jburns24'
 
@@ -38,23 +50,28 @@ jobs:
       - name: Terragrunt hcl check
         run: terragrunt hclfmt --terragrunt-check
 
+
       - name: Terraform fmt check
         run: terraform fmt -check -recursive
+
 
       - name: Terragrunt validate check
         run: terragrunt run-all validate --terragrunt-non-interactive
 
+
       - name: Terragrunt Plan
         id: terragrunt_plan
         run: |
+          pwd
           terragrunt init --terragrunt-non-interactive
           terragrunt plan --terragrunt-non-interactive -out plan.out
           terragrunt show --terragrunt-non-interactive -no-color -json plan.out > plan.json
         continue-on-error: true # Continue on error to ensure the plan is added as a comment on the PR.
 
+
       - uses: liatrio/terraform-change-pr-commenter@v1.3.2
         with:
-          json-file: ./plan.json
+          json-file: infra/environments/dev/plan.json
 
       - name: Status
         if: contains(steps.*.outcome, 'failure')
