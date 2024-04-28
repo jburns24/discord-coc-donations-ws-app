@@ -14,7 +14,7 @@ resource "azurerm_linux_web_app" "coc_donations_app_service" {
 
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
-    "SECRET" = var.secret
+    "SECRET"                              = var.secret
   }
 
   site_config {
