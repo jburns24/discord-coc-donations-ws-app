@@ -18,11 +18,20 @@ resource "azurerm_linux_web_app" "coc_donations_app_service" {
     "CLASH_TOKEN"                         = var.clash_token
   }
 
+  logs {
+    http_logs {
+      file_system {
+        retention_in_days = 1
+        retention_in_mb   = 35
+      }
+    }
+  }
+
   site_config {
     always_on = false # This has to be disabled for the free tier
     application_stack {
-      docker_image_name   = "coc-disco-donations:latest"
-      docker_registry_url = "https://ghcr.io/jburns24/discord-coc-donations-ws-app"
+      docker_image_name   = var.image_name
+      docker_registry_url = var.container_registry_url
     }
   }
 }

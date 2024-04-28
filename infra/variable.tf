@@ -23,3 +23,22 @@ variable "clash_token" {
   type        = string
 
 }
+
+variable "image_tag" {
+  description = "The tag for the Docker image"
+  type        = string
+  default     = "latest"
+
+}
+
+variable "container_registry_url" {
+  description = "The URL for the Container registry"
+  type        = string
+  default     = "https://ghcr.io"
+
+}
+
+variable "image_name" {
+  description = "The name of the Docker image"
+  type        = string
+}
