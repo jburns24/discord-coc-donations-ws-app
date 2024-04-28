@@ -1,3 +1,14 @@
+# Indicate what region to deploy the resources into
+generate "provider" {
+  path = "provider.tf"
+  if_exists = "overwrite_terragrunt"
+  contents = <<EOF
+provider "azurerm" {
+  features {}
+}
+EOF
+}
+
 remote_state {
   backend = "azurerm"
   config = {
@@ -6,10 +17,4 @@ remote_state {
     storage_account_name = "cocdiscodonationstfstate"
     container_name       = "tfstate"
   }
-}
-
-inputs = {
-  location            = "West US 2"
-  resource_group_name = "coc-disco-donations"
-  app_name            = get_env("APP_NAME", "coc-donations-app-service")
 }
