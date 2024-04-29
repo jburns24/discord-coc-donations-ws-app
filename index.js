@@ -52,7 +52,7 @@ discordClient.on('messageCreate', async message => {
 
 // Listen for a message that is 'beep' and reply with 'Boop!' But this should be an async handler
 discordClient.on('messageCreate', async message => {
-    if (message.content === 'donations') {
+    if (message.content.toLowerCase() === 'donations') {
         if (!registeredGuilds.has(message.guild.id)) {
             await message.reply('No clan registered for this guild.');
             return;
