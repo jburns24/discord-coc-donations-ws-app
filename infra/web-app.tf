@@ -3,7 +3,8 @@ resource "azurerm_service_plan" "coc_donations_app_service_plan" {
   resource_group_name = azurerm_resource_group.coc_donations_rg.name
   location            = azurerm_resource_group.coc_donations_rg.location
   os_type             = "Linux"
-  sku_name            = "F1"
+  # sku_name            = "F1" # Free teir
+  sku_name            = "B1" # Basic teir
 }
 
 resource "azurerm_linux_web_app" "coc_donations_app_service" {
