@@ -16,5 +16,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: coc-donations:latest
+    ports:
+      - "80:80"
     env_file:
       - .env

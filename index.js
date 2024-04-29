@@ -3,6 +3,22 @@ import { Client as DiscordClient, GatewayIntentBits } from 'discord.js';
 import { Client as ClashClient } from 'clashofclans.js';
 import { getClanTag } from './helpers.js';
 
+// SIMPLE WEBSERVER START
+// This is so the bot can pass Azure AppService warm up checks
+import http from 'http';
+
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('OK');
+});
+
+const PORT = process.env.PORT || 80; // Make sure to use the PORT environment variable
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+// SIMPLE WEBSERVER END
+
 // Create a new client instance with intents that allow the bot to get information about guilds, messages, and message content
 const discordClient = new DiscordClient({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const clashClient = new ClashClient({ keys: [process.env.CLASH_TOKEN] });
