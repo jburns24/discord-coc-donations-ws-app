@@ -19,6 +19,10 @@ server.listen(PORT, () => {
 });
 // SIMPLE WEBSERVER END
 
+
+// TODO follow this guide to implement Azure Cosmos DB
+// https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/quickstart-nodejs?pivots=devcontainer-codespace
+
 // Create a new client instance with intents that allow the bot to get information about guilds, messages, and message content
 const discordClient = new DiscordClient({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const clashClient = new ClashClient({ keys: [process.env.CLASH_TOKEN] });
@@ -53,12 +57,22 @@ discordClient.on('messageCreate', async message => {
             await message.reply('No clan registered for this guild.');
             return;
         }
-        const clan = await clashClient.getClan(registeredGuilds.get(message.guild.id));
-        const players = await clan.fetchMembers();
-        const playerAndDonations = players.map(p => [p.name, p.donations]);
-        // Get the season for a player
-        const sortedDonations = playerAndDonations.sort((a, b) => b[1] - a[1]);
-        message.channel.send(`Top 10 Donators in ${clan.name}:\n${sortedDonations.slice(0, 10).map(p => `${p[0]}: ${p[1]}`).join('\n')}`);
+        try {
+            const clan = await clashClient.getClan(registeredGuilds.get(message.guild.id));
+            const players = await clan.fetchMembers();
+            const playerAndDonations = players.map(p => [p.name, p.donations]);
+            // Get the season for a player
+            const sortedDonations = playerAndDonations.sort((a, b) => b[1] - a[1]);
+            message.channel.send(`Top 10 Donators in ${clan.name}:\n${sortedDonations.slice(0, 10).map(p => `${p[0]}: ${p[1]}`).join('\n')}`);
+            // Rest of the code...
+        } catch (error) {
+            if (error.reason === 'accessDenied.invalidIp') {
+                message.channel.send('Invalid authorization: API key does not allow access from this IP. Please retry...');
+                // Retry the commands here
+            } else {
+                throw error;
+            }
+        }
     }
 });
 
