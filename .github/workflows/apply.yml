@@ -16,10 +16,11 @@ permissions:
 env:
   # Setting an environment variable with the value of a configuration variable
 #   APP_NAME: ${{ vars.APP_NAME }}
-  # ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  # ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  # ARM_USE_OIDC: "true"
   # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
-  # ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   TF_VAR_discord_token: ${{ secrets.DISCORD_TOKEN }}
   TF_VAR_clash_token: ${{ secrets.CLASH_TOKEN }}
 
