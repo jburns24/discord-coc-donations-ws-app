@@ -16,10 +16,10 @@ permissions:
 env:
   # Setting an environment variable with the value of a configuration variable
   APP_NAME: ${{ vars.APP_NAME }}
-  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
-  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  # ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  # ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
+  # ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   TF_VAR_discord_token: ${{ secrets.DISCORD_TOKEN }}
   TF_VAR_clash_token: ${{ secrets.CLASH_TOKEN }}
 
@@ -67,6 +67,12 @@ jobs:
           terragrunt plan --terragrunt-non-interactive -out plan.out
           terragrunt show --terragrunt-non-interactive -no-color -json plan.out > plan.json
         continue-on-error: true # Continue on error to ensure the plan is added as a comment on the PR.
+        env:
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          # ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET}}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_USE_OIDC: "true"
 
 
       - uses: liatrio/terraform-change-pr-commenter@v1.3.2
